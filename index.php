@@ -197,6 +197,7 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
                         ."\nFakultas : ".$datanya['fak']
                         ."\nProdi : ".$datanya['prod']
                         ."\nAngkatan : ".$datanya['ang']
+                        ."\nCluster : ".$datanya['clus']
                         ."\n================";
                         $result = $bot->replyText($event['replyToken'], $hasilnya);
                     }
