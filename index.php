@@ -84,10 +84,10 @@ $app->post('/webhook', function ($request, $response) use ($bot, $pass_signature
           $result = $bot->replyText($event['replyToken'], $event['source']['groupId']);
         }
         if ($a[0]=="/sms") {
-          $xml = file_get_contents(getenv("smsapi").urlencode($a[1])."&pesan=".urlencode($a[2]));
-          $json = json_encode($xml);
-          $array = json_decode($json,TRUE);
-          $result = $bot->replyText($event['replyToken'], var_dump($array));
+          $xmlString = file_get_contents(getenv("smsapi").urlencode($a[1])."&pesan=".urlencode($a[2]));
+          $xml = new SimpleXMLElement($xmlString);
+          $hasil="SMS ke nomor ".$a[1].", Status : ".$xml->message->text;
+          $result = $bot->replyText($event['replyToken'], $hasil);
         }
         else if ($a[0]=="/jadwal") {
           $kota=(isset($a[1])) ? $a[1] : "malang";
